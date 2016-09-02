@@ -81,6 +81,17 @@ DATABASES = {
     }
 }
 
+import dj_database_url
+
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+ALLOWED_HOSTS = ['*']
+ON_HEROKU = os.environ.get('PORT')
+if ON_HEROKU:
+    DATABASE_URL='postgres://lripothngexrdx:g2xxy-umcBf4ijojCwAmr3-wLL@ec2-54-227-248-123.compute-1.amazonaws.com:5432/d2q2a5f08bluno'
+    DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
