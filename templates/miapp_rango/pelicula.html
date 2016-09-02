@@ -1,0 +1,31 @@
+{% extends 'miapp_rango/index.html' %}
+
+{% load staticfiles %}
+<script>
+function desactiva_enlace(enlace)
+{
+      enlace.disabled='disabled';
+}
+</script>
+{% block title %}Pelicula{% endblock %}
+
+{% block body_block %}
+
+    {% if pelicula %}
+
+        <h3><a href="{{ pelicula.url }}">Link FilmAfinity: {{ pelicula.titulo }}</a></h3>
+        <h5>Me Gustas: {{ pelicula.visitas }} </h5>
+        <img src="{{ MEDIA_URL }}/{{ pelicula.portada }}" alt="No hay portada" />
+        <h2><a href="add_visitas/" onClick="desactiva_enlace(this)">{{ pelicula.visitas }} <span class="glyphicon glyphicon-thumbs-up"></span></a> </h2>
+
+        </br></br>
+        <h3><a href = "/miapp_rango/eliminapeli/{{ pelicula.slug_pelicula }}/">Elimina pelicula</a></h3>
+
+
+        <!--<a href = "/miapp_rango/"> Pagina principal</a><br/>-->
+
+    {% else %}
+        no existe la peli! que cojones pasa
+    {% endif %}
+
+{% endblock %}

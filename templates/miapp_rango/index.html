@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+
+    <head>
+       <!--  <link rel="stylesheet" href="{% static "css/base.css" %}" />    //añadir CSS -->
+       <!--  <script src="{% static "js/jquery.js" %}"></script>   //añadir JavaScript -->
+       <meta charset="utf-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+       <meta name="description" content="rango">
+       <meta name="author" content="Javi">
+       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+       <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+       <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+       <link href="http://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
+       <script type="text/javascript" src="{% static 'js/jquery-1.12.0.js' %}"></script>
+       <script type="text/javascript" src="{% static 'js/cambiartexto.js' %}"></script>
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+       <link rel="stylesheet" href="{% static 'css/style.css' %}">
+       <title>MiAPPRango - {% block title %}Home{% endblock %}</title>
+    </head>
+
+    <body>
+
+        <!--BARRA DE NAVEGACION DE ARRIBA3-->
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/miapp_rango/">Mi APP</a>
+            </div>
+            <div class="navbar-collapse collapse">
+              <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_authenticated %}
+                      <h4>{{ user.username }}: <a href="/miapp_rango/deslogueo/">Logout</a><br /></h4>
+                      <a href="/miapp_rango/restricted/">Restringido uohhhh¿¿!!</a><br />
+                    {% else %}
+                      <a href="/miapp_rango/registro/">Registrate ya hombre</a><br />
+                      <a href="/miapp_rango/logueo/">Logueate loco</a><br />
+                    {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!--PARTE DE ABAJO (IMAGEN Y LOS GENEROS)-->
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                {% block side_block %}
+                  <img src="{% static "images/pelis.jpg" %}" alt="dale a la burra" />
+                {% endblock %}
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+              <div>
+                  {% block body_block %}
+                      {% if generos %}
+                        <ul>
+                          {% for g in generos %}
+                            <li><a href = "/miapp_rango/genero/{{g.slug_genero}}/">{{ g.n_genero }}</a></li>
+                          {% endfor %}
+                        </ul>
+                      {% else %}
+                        <strong> No hay generos.</strong>
+                      {% endif %}
+
+                      {% if user.is_authenticated %}
+                          <h3><a href="/miapp_rango/add_genero/">Nuevo genero</a><br /></h3>
+                      {% endif %}
+
+                  {% endblock %}
+                  </br></br></br>
+                  <script src="http://code.highcharts.com/highcharts.js"></script>
+                  <script type="text/javascript" src="{% static 'js/grafica.js' %}"></script>
+                  <script type="text/javascript">
+                  $(function(){
+                            $.ajax({ /*peticion de los datos al servidor mediante la llamada ajax*/
+                                url: "{% url 'reclama_datos' %}",
+                                type: "get",
+                                /*si la peticion es satisfactoria*/
+                                success: function(datos){ /*la respuestade la peticion(datos) es pasada como argumento a la funcion*/
+                                    visualizadatos(datos);
+                                },
+                                failure: function(datos){
+                                    alert('No se pueden visualizar los datos');
+                                }
+                            });
+                      });
+                  </script>
+                  <div id="container" style="width:100%; height:400px;"></div>
+                  </br></br></br>
+                  <div id="botones">
+                      <div class="boton" id="aumentar">Texto Grande</div>
+                      <div class="boton">Texto Normal</div>
+                      <div class="boton" id="disminuir">Texto Chico</div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <!--
+        {% if user.is_authenticated %}
+          <h1>Hola {{ user.username }}!</h1>
+        {% else %}
+          <h1>Mi app dice...hola tio!</h1>
+        {% endif %}
+
+        {% if generos %}
+          <ul>
+            {% for g in generos %}
+              <li><a href = "/miapp_rango/genero/{{g.slug_genero}}">{{ g.n_genero }}</a></li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <strong> No hay generos.</strong>
+        {% endif %}
+
+
+        {% if user.is_authenticated %}
+          <a href="/miapp_rango/deslogueo/">Logout</a><br />
+          <a href="/miapp_rango/restricted/">Restringido uohhhh¿¿!!</a><br />
+          <a href="/miapp_rango/add_genero/">Nuevo genero</a><br />
+        {% else %}
+          <a href="/miapp_rango/registro/">Registrate ya hombre</a><br />
+          <a href="/miapp_rango/logueo/">Logueate loco</a><br />
+        {% endif %}
+
+        <img src="{% static "images/gg.jpg" %}" alt="dale a la burra" />
+      -->
+    </body>
+
+</html>

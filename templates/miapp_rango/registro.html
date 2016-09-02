@@ -1,0 +1,25 @@
+{% extends 'miapp_rango/index.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Registro{% endblock %}
+
+{% block body_block %}
+  {% if registered %}
+      IEEEEE!!!!!!!!: <strong>Gracias por registrarte!</strong>
+      <a href="/miapp_rango/">Pagina principal</a><br />
+
+  {% else %}
+      <form id="user_form" method="post" action="/miapp_rango/registro/"
+        enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <!-- .muestra cada formulario,el metodo as_p muestra cada elemento en una nueva linea -->
+            {{ user_form.as_p }} <!-- estos son los que le pasamos en blanco para rellenar-->
+            {{ profile_form.as_p }}</br></br> 
+
+            <input type="submit" name="submit" value="Registrate" />
+        </form>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'miapp_rango/index.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Generos{% endblock %}
+
+{% block body_block %}
+
+    {% if genero %}
+        <div class="page-header">
+            <h1>{{ nombre_genero  }}</h1>
+        </div>
+
+        {% if peliculas %}
+          <ul>
+              {% for p in peliculas %}
+                <!--<li><a href="{{ p.url }}">{{ p.titulo }}</a></li>-->
+                <li><a href = "/miapp_rango/genero/{{ genero.slug_genero }}/{{ p.slug_pelicula }}/">{{ p.titulo }}</a></li>
+              {% endfor %}
+          </ul>
+
+        <h3>Visitas en este genero: {{ genero.visitas_genero }}</h3>
+        <!--<a href = "/miapp_rango/"> Pagina principal</a><br/>-->
+
+        {% else %}
+            <strong>No hay peliculas en esta categoria.</strong>
+        {% endif %}
+
+
+    {% else %}
+        El genero de {{ nombre_genero }} no existe!
+    {% endif %}
+
+{% endblock %}
+
+{% block side_block %}
+  <h3><a href = "/miapp_rango/genero/{{ genero.slug_genero }}/add_pelicula/"> Añade Pelicula</a></h3>
+  <h3><a href = "/miapp_rango/"> Generos</a></h3>
+{% endblock %}
+
+
+
+
+
+<!--
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MiAPP</title>
+    </head>
+
+    <body>
+        {% if genero %}
+        <h1>{{ nombre_genero  }}</h1>
+            {% if peliculas %}
+            <ul>
+                {% for p in peliculas %}
+                <li><a href="{{ p.url }}">{{ p.titulo }}</a></li>
+                {% endfor %}
+            </ul>
+            <h3>Visitas en este genero: {{ genero.visitas_genero }}</h3>
+            <a href = "/miapp_rango/"> Pagina principal</a><br/>
+            {% else %}
+                <strong>No hay peliculas en esta categoria.</strong>
+            {% endif %}
+
+            <a href = "/miapp_rango/genero/{{ genero.genero_slug }}/add_pelicula"> Aniade Pelicula</a>
+        {% else %}
+            El genero de {{ nombre_genero }} no existe!
+        {% endif %}
+    </body>
+</html>
+-->

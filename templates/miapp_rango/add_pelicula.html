@@ -1,0 +1,67 @@
+{% extends 'miapp_rango/index.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Añade Película{% endblock %}
+
+{% block body_block %}
+    <div class="page-header">
+        <h1>Añade Pelicula</h1>
+    </div>
+
+    <form id="genero_form" method="post" action="/miapp_rango/genero/{{ genero.slug_genero }}/add_pelicula/">
+
+        {% csrf_token %} <!--proteje los datos -->
+
+        {% for hidden in form_pelicula.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+
+        {% for field in form_pelicula.visible_fields %}
+            {{ field.errors }}
+            {{ field.help_text }}
+            {{ field }}</br></br>
+        {% endfor %}
+
+        <input type="submit" name="submit" value="Añadir pelicula" />
+    </form>
+
+{% endblock %}
+
+
+
+
+
+
+<!--
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MIAPP</title>
+    </head>
+
+    <body>
+        <h1>Introduce la pelicula en el genero {{ genero }}</h1>
+
+        <form id="genero_form" method="post" action="/miapp_rango/genero/{{ genero.genero_slug }}/add_pelicula/">
+
+            {% csrf_token %} <!--proteje los datos --><!--
+
+            {% for hidden in form_pelicula.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+
+            {% for field in form_pelicula.visible_fields %}
+                {{ field.errors }}
+                {{ field.help_text }}
+                {{ field }}
+            {% endfor %}
+
+            <input type="submit" name="submit" value="Crear genero" />
+        </form>
+    </body>
+
+</html>
+-->

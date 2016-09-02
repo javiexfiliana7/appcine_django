@@ -1,0 +1,71 @@
+{% extends 'miapp_rango/index.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Añade Genero{% endblock %}
+
+{% block body_block %}
+    <div class="page-header">
+        <h1>Añade genero</h1>
+    </div>
+    <form id="genero_form" method="post" action="/miapp_rango/add_genero/">
+
+        {% csrf_token %} <!--proteje los datos -->
+
+        {% for hidden in form_genero.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+
+        {% for field in form_genero.visible_fields %}
+            {{ field.errors }}
+            {{ field.help_text }}
+            {{ field }}
+        {% endfor %}
+
+        <input type="submit" name="submit" value="Crear genero" />
+    </form>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MIAPP</title>
+    </head>
+
+    <body>
+        <h1>Introduce un genero</h1>
+
+        <form id="genero_form" method="post" action="/miapp_rango/add_genero/">
+
+            {% csrf_token %} <!--proteje los datos --><!--
+
+            {% for hidden in form_genero.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+
+            {% for field in form_genero.visible_fields %}
+                {{ field.errors }}
+                {{ field.help_text }}
+                {{ field }}
+            {% endfor %}
+
+            <input type="submit" name="submit" value="Crear genero" />
+        </form>
+    </body>
+
+</html>
+-->

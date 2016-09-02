@@ -1,0 +1,50 @@
+{% extends 'miapp_rango/index.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Login{% endblock %}
+
+{% block body_block %}
+    <div class="page-header">
+        <h1>LOGUEATE!!!!</h1>
+    </div>
+    <form id="login_form" method="post" action="/miapp_rango/logueo/">
+        {% csrf_token %}
+        Username: <input type="text" name="username" value="" size="50" />
+        <br />
+        Password: <input type="password" name="password" value="" size="50" />
+        <br />
+
+        <input type="submit" value="Enviar" />
+    </form></br></br>
+{% endblock %}
+
+
+
+
+
+
+
+<!--
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MI APP</title>
+    </head>
+
+    <body>
+        <h1>Login!!!</h1>
+
+        <form id="login_form" method="post" action="/miapp_rango/logueo/">
+            {% csrf_token %}
+            Username: <input type="text" name="username" value="" size="50" />
+            <br />
+            Password: <input type="password" name="password" value="" size="50" />
+            <br />
+
+            <input type="submit" value="submit" />
+        </form>
+
+    </body>
+</html>
+-->
