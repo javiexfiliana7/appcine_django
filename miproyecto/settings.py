@@ -24,7 +24,11 @@ DEBUG = False
 
 TEMPLATE_DEBUG = True
 
+<<<<<<< HEAD
 
+=======
+ALLOWED_HOSTS = ['*']
+>>>>>>> 2f94770f6e1b1d28192ebcefcfe1185bce8fdab8
 
 LOGIN_URL = '/miapp_rango/logueo/'
 
